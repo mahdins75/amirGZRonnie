@@ -1,9 +1,11 @@
 const { request, response, Router } = require('express');
 const express = require('express');
+var bodyParser = require('body-parser');
 
 const musicRoute = require('./routes/music');
 
 const app = express();
+app.use(express.urlencoded({ extended: true }));
 const PORT = 3001;
 
 
