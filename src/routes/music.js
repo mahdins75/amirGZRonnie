@@ -1,51 +1,24 @@
 const { Router } = require('express');
-
+var  musicList= require('../data')
 const router = Router();
 
-const musicList = [
-    {
-        ID: '1',
-        item: 'coldplay',
-        genre: 'pop'
-    },
-    {
-        ID: '2',
-        item: 'oneD',
-        genre: 'contry'
-    },
-    {
-        ID: '3',
-        item: 'Queen',
-        genre: 'jass'
-    },
-    {
-        ID: "6",
-        item: "AA",
-        genre: "light"
-    },
-    {
-        ID: "7",
-        item: "BB",
-        genre: "light 2"
-    },
-];
 
-let favorits=[];
+
 router.get('/', function (request, response) {
     let genre  = request.query.genre;
     let  item  = request.query.item;
     let  ID  = request.query.ID;
-
-    let reuslt = musicList;
+console.log(musicList.musicList);
+    let reuslt = musicList.musicList;
     if (genre && (!ID || ID <= 0)) {
         console.log(genre);
 
-        reuslt = reuslt.filter(m => m.genre == genre);
+        reuslt = reuslt.filter(m => m.genre.toLowerCase().includes(genre.toLowerCase()));
     }
     if (item && (!ID || ID <= 0)) {
     console.log(item);
 
-        reuslt = reuslt.filter(m => m.item == item);
+        reuslt = reuslt.filter(m => m.item.toLowerCase().includes(item.toLowerCase()));
     }
     if (ID&&ID>0) {
     console.log(ID);
@@ -62,7 +35,7 @@ router.get('/', function (request, response) {
 });
 router.get('/:item', (request, response) => {
     const { item } = request.params;
-    const musicItem = musicList.find((g) => g.item === item);
+    const musicItem = musicList.musicList.find((g) => g.item === item);
     if (musicItem) {
         response.send(musicItem);
     }
@@ -74,7 +47,7 @@ router.get('/:item', (request, response) => {
 
 router.get('/:genre', (request, response) => {
     const { genre } = request.params;
-    const musicGenre = musicList.find((g) => g.genre === genre);
+    const musicGenre = musicList.musicList.find((g) => g.genre === genre);
     response.send(musicGenre);
 });
 
@@ -91,7 +64,7 @@ router.get('/:genre', (request, response) => {
 
 
 router.post('/addToMyFavorits', (request, response) => {
-   var result=musicList.filter(m=>m.ID==request.body.ID);
+   var result=musicList.musicList.filter(m=>m.ID==request.body.ID);
    if(result)
    {
     var validation=favorits.filter(m=>m.ID==request.body.ID);
@@ -123,14 +96,10 @@ router.post('/removeFromMyFavorits', (request, response) => {
      }
      else{
          response.send({staus:false,"message":`the track you selected does not exist on your play list `});
- 
      }
-     
- 
  });
 router.get('/GetMyPlayList', function (request, response) {
     
      response.send(favorits);
 });
-
 module.exports = router;
