@@ -1,63 +1,136 @@
 <!DOCTYPE html>
-<html lang="en" >
-    <style ></style>
+<html lang="en">
+<style></style>
+
 <head>
-    <link rel="stylesheet" href="style.css" />
-    <!-- <meta charset="UTF-8">
+  <link rel="stylesheet" href="style.css" />
+  <!-- <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
-    <title>Music Searcher</title>
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+  <title>Music Searcher</title>
 </head>
+
 <body>
 
-    <div class="split left">
-        <div class="centered">
-        
-          <h2>Search One</h2>
-          <p>Search Your music by ID, Album and etc.</p>
-          <input class="myInput" type="search">
-          <input type="button" value="Search">
-        </div>
-      </div>
-      
-      <div class="split right">
-        <div class="centered">
-          
-            <h2>Favorites</h2>
-            <p>Your favorite musics</p>
-            <p>Your favorite musics</p>
-            <p>Your favorite musics</p>
-            <p>Your favorite musics</p>
-            <p>Your favorite musics</p>
-            <p>Your favorite musics</p>
-            <p>Your favorite musics</p>
-            <p>Your favorite musics</p>
-            <p>Your favorite musics</p>
-            <p>Your favorite musics</p>
-            <p>Your favorite musics</p>
-            <p>Your favorite musics</p>
-            <p>Your favorite musics</p>
-            <p>Your favorite musics</p>
+  <div class="split left">
+    <div class="centered">
+
+      <h2>Search One</h2>
+      <input class="myInput" id="searchByID" value="" placeholder="searchByID">
+      <input class="myInput" id="searchByItem" value="" placeholder="searchByItem">
+      <input class="myInput" id="searchByGenre" value="" placeholder="searchGenre">
+      <input onclick="loadAllTracks()" type="button" value="Search">
+      <input onclick="GetMyPlayList()" type="button" value="MyPlayList">
+    </div>
+  </div>
+
+  <div class="split right">
+    <div class="centered">
 
 
 
-          <!-- <input type="search">
+
+
+      <!-- <input type="search">
           <input type="button" value="Search"> -->
-        </div>
-      </div>
-      <div style="color: black;">
-        ssss
-      </div>
+    </div>
+  </div>
+  <div style="color: black;">
+    <table>
+      <thead>
+        <tr>
+          <th colspan="2">ID</th>
+          <th colspan="2">item</th>
+          <th colspan="2">genre</th>
+          <th colspan="2"></th>
+        </tr>
+      </thead>
+      <tbody id="resultArea">
+        
+      </tbody>
+    </table>
+
+  </div>
+  <div style="color: black;">
+    <table>
+      <thead>
+        <tr>
+          <th colspan="2">ID</th>
+          <th colspan="2">item</th>
+          <th colspan="2">genre</th>
+          <th colspan="2"></th>
+        </tr>
+      </thead>
+      <tbody id="favoritArea">
+        
+      </tbody>
+    </table>
+
+  </div>
 
 
 
 
+  <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
 
 
+  <script>
+    var trackList = [];
+    function loadAllTracks() {
+      var item = document.getElementById("searchByItem").value;
 
-    <script src="app.js">
+      console.log(item);
+      var genre = document.getElementById("searchByGenre").value;
+      console.log(genre);
 
+      var ID = document.getElementById("searchByID").value;
+      console.log(ID);
 
-    </script>
+      axios.get(`http://localhost:3001/api/music?item=${item}&genre=${genre}&ID=${ID}`).then(function (response) {
+
+        console.log(ID);
+        let htmlData = '';
+        response.data.forEach(element => {
+          htmlData +=
+            `<tr>
+                   <td> ${element.ID}</td>     
+                   <td> ${element.genre}</td>     
+                   <td> ${element.item}</td>     
+                   <td> <input type="button" onclick="addToFavorit(${element.ID})" value="add to favorit" /></td>     
+          </tr>`;
+        });
+        console.log(htmlData);
+        var resultArea = document.getElementById("resultArea");
+        resultArea.innerHTML = htmlData;
+      }); 
+    }
+    function addToFavorit(id) {
+      var data = { ID: id }
+      axios.post('http://localhost:3001/api/favorit/addToMyFavorits', data).then(function (response){console.log(response.data),GetMyPlayList();});
+      
+    }
+      function GetMyPlayList() {
+        axios.get(`http://localhost:3001/api/favorit`).then(function (response) {
+
+          console.log(response);
+          let htmlData = '';
+          response.data.forEach(element => {
+            htmlData +=
+              `<tr>
+           <td> ${element.ID}</td>     
+           <td> ${element.genre}</td>     
+           <td> ${element.item}</td>     
+           <td> <input type="button" onclick="addToFavorit(${element.ID})" value="add to favorit" /></td>     
+  </tr>`;
+          });
+          var resultArea = document.getElementById("favoritArea");
+          resultArea.innerHTML = htmlData;
+        });
+      }
+      
+    loadAllTracks();
+    GetMyPlayList();
+  </script>
 </body>
+
 </html>
