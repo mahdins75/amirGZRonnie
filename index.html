@@ -81,7 +81,7 @@
     async function loadAllTracks() {
       var item = document.getElementById("searchByItem").value;
       var genre = document.getElementById("searchByGenre").value;
-      var parent = document.getElementById("searchParent").parent;
+      var parent = document.getElementById("searchParent").value;
       var ID = document.getElementById("searchByID").value;
 
       var response = fetch(`http://localhost:5501/api/music?item=${item}&genre=${genre}&ID=${ID}&parent=${parent}`)

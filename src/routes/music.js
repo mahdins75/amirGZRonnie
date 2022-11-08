@@ -13,7 +13,6 @@ router.get('/', function (request, response) {
     let  item  = request.query.title;
     let  ID  = request.query.genre_id;
     let  parent  = request.query.parent;
-console.log(musicList.musicList);
     let reuslt = musicList.musicList;
     if (genre && (!ID || ID <= 0)) {
         console.log(genre);
