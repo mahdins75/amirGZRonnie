@@ -18,7 +18,7 @@ function loadAllTracks() {
   var ID = document.getElementById("searchByID").value;
   console.log(ID);
 
-  axios.get(`http://localhost:3001/api/music?item=${item}&genre=${genre}&ID=${ID}`).then(function (response) {
+  axios.get(`http://localhost:5501/api/music?item=${item}&genre=${genre}&ID=${ID}`).then(function (response) {
 
     console.log(ID);
     let htmlData = '';
@@ -38,11 +38,11 @@ function loadAllTracks() {
 }
 function addToFavorit(id) {
   var data = { ID: id }
-  axios.post('http://localhost:3001/api/favorit/addToMyFavorits', data).then(function (response){console.log(response.data),GetMyPlayList();});
+  axios.post('http://localhost:5501/api/favorit/addToMyFavorits', data).then(function (response){console.log(response.data),GetMyPlayList();});
   
 }
   function GetMyPlayList() {
-    axios.get(`http://localhost:3001/api/favorit`).then(function (response) {
+    axios.get(`http://localhost:5501/api/favorit`).then(function (response) {
 
       console.log(response);
       let htmlData = '';

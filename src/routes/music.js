@@ -1,5 +1,5 @@
 const { Router } = require('express');
-var  musicList= require('../data')
+var  musicList= require('../data2')
 const router = Router();
 
 // let genre_id  = request.query.genre_id;
@@ -12,6 +12,7 @@ router.get('/', function (request, response) {
     let genre  = request.query.tracks;
     let  item  = request.query.title;
     let  ID  = request.query.genre_id;
+    let  parent  = request.query.parent;
 console.log(musicList.musicList);
     let reuslt = musicList.musicList;
     if (genre && (!ID || ID <= 0)) {
