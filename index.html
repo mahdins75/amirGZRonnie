@@ -19,6 +19,7 @@
       <input class="myInput" id="searchByID" value="" placeholder="searchByID">
       <input class="myInput" id="searchByItem" value="" placeholder="searchByItem">
       <input class="myInput" id="searchByGenre" value="" placeholder="searchGenre">
+      <input class="myInput" id="searchParent" value="" placeholder="searchParent">
       <input onclick="loadAllTracks()" type="button" value="Search">
       <input onclick="GetMyPlayList()" type="button" value="MyPlayList">
     </div>
@@ -72,19 +73,18 @@
 
 
 
-<!-- SCRIPT SIDE -->
+  <!-- SCRIPT SIDE -->
 
   <script>
 
     var trackList = [];
     async function loadAllTracks() {
       var item = document.getElementById("searchByItem").value;
-
       var genre = document.getElementById("searchByGenre").value;
-
+      var parent = document.getElementById("searchParent").parent;
       var ID = document.getElementById("searchByID").value;
 
-      var response = fetch(`http://localhost:5501/api/music?item=${item}&genre=${genre}&ID=${ID}`)
+      var response = fetch(`http://localhost:5501/api/music?item=${item}&genre=${genre}&ID=${ID}&parent=${parent}`)
         .then((response) => {
           return response.json();
         }).then((data) => {
