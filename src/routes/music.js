@@ -5,7 +5,7 @@ const router = Router();
 
 
 router.get('/', function (request, response) {
-    let genre  = request.query.genre;
+    let genre  = request.   query.genre;
     let  item  = request.query.item;
     let  ID  = request.query.ID;
 console.log(musicList.musicList);
