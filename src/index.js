@@ -10,7 +10,7 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(cors())
 
-const PORT = 3001;
+const PORT = 5501;
 
 
 ///middlewares

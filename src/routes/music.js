@@ -2,12 +2,16 @@ const { Router } = require('express');
 var  musicList= require('../data')
 const router = Router();
 
-
+// let genre_id  = request.query.genre_id;
+// let  tracks  = request.query.tracks;
+// let  parent  = request.query.parent;
+// let  title  = request.query.title;
+// let  top_level  = request.query.partop_levelent;
 
 router.get('/', function (request, response) {
-    let genre  = request.   query.genre;
-    let  item  = request.query.item;
-    let  ID  = request.query.ID;
+    let genre  = request.query.tracks;
+    let  item  = request.query.title;
+    let  ID  = request.query.genre_id;
 console.log(musicList.musicList);
     let reuslt = musicList.musicList;
     if (genre && (!ID || ID <= 0)) {
@@ -25,6 +29,12 @@ console.log(musicList.musicList);
 
         reuslt = reuslt.filter(m => m.ID == ID);
     }
+    if (parent&&parent>0) {
+        console.log(parent);
+    
+            reuslt = reuslt.filter(m => m.parent == parent);
+    }
+    
     if (reuslt) {
         response.send(reuslt);
     }
@@ -33,6 +43,8 @@ console.log(musicList.musicList);
     }
     // response.send(musicItem);
 });
+
+
 router.get('/:item', (request, response) => {
     const { item } = request.params;
     const musicItem = musicList.musicList.find((g) => g.item === item);

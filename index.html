@@ -71,10 +71,11 @@
 
 
 
-  <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
 
+<!-- SCRIPT SIDE -->
 
   <script>
+
     var trackList = [];
     async function loadAllTracks() {
       var item = document.getElementById("searchByItem").value;
@@ -94,7 +95,7 @@
                    <td> ${element.ID}</td>     
                    <td> ${element.genre}</td>     
                    <td> ${element.item}</td>     
-                   <td> <input type="button" onclick="addToFavorit(${element.ID})" value="add to favorit" /></td>     
+                   <td> <input type="button" onclick="addToFavorit(${element.ID})" value="add to fa" /></td>     
           </tr>`;
           })
           var resultArea = document.getElementById("resultArea");
@@ -142,7 +143,8 @@
            <td> ${element.ID}</td>     
            <td> ${element.genre}</td>     
            <td> ${element.item}</td>     
-           <td> <input type="button" onclick="removefromFavorit(${element.ID})" value="remove from favorits" /></td>     
+           <td> <input type="button" onclick="removefromFavorit(${element.ID})" value="remove from favorits" /></td>   
+             
   </tr>`;
           });
           var resultArea = document.getElementById("favoritArea");
