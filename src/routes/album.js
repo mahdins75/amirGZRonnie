@@ -1,5 +1,5 @@
 const { Router } = require('express');
-var  albumList= require('../album')
+var  albumList= require('../albumdata')
 const router = Router();
 
 // let genre_id  = request.query.genre_id;
