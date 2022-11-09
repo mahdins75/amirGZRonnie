@@ -9,30 +9,52 @@ const router = Router();
 // let  top_level  = request.query.partop_levelent;
 let favorits=[];
 
-album_id: 
-album_comments: 
-album_date_created: 
-album_date_released: 
-album_engineer: 
-album_favorites:
-album_handle: 
-album_image_file:
-album_images: 
-album_information: 
-album_listens: 
-album_producer: 
-album_title: 
-album_tracks:
-album_type:
-album_url: 
-artist_name: 
-artist_url: 
-tags: []
+// album_id: 
+// album_comments: 
+// album_date_created: 
+// album_date_released: 
+// album_engineer: 
+// album_favorites:
+// album_handle: 
+// album_image_file:
+// album_images: 
+// album_information: 
+// album_listens: 
+// album_producer: 
+// album_title: 
+// album_tracks:
+// album_type:
+// album_url: 
+// artist_name: 
+// artist_url: 
+// tags: []
+
+
 router.get('/', function (request, response) {
     let genre  = request.query.album_comments;
-    let  item  = request.query.album_title;
-    let  ID  = request.query.album_id;
-    let  parent  = request.query.album_tracks;
+    let item  = request.query.album_title;
+    let ID  = request.query.album_id;
+    let parent  = request.query.album_tracks;
+    let datecreat = request.query.albbum_date_created;
+    let datereleased = request.query.albbum_date_released;
+    let eng = request.query.album_engineer;
+    let favor = request.query.album_favorites;
+    let handle = request.query.album_handle;
+    let imgfile = request.query.album_image_file;
+    let imgs = request.query.album_images;
+    let info = request.query.album_information;
+    let listens = request.query.album_listens;
+    let alb_producer = request.query.album_producer;
+    let alb_title = request.query.album_title;
+    let alb_tracks = request.query.album_tracks;
+    let alb_type = request.query.album_type;
+    let alb_url = request.query.album_url;
+    let art_name = request.query.artist_name;
+    let alb_tags = request.query.tags;
+    let art_url = request.query.artist_url;
+
+
+
     let reuslt = albumList.albumList;
     if (genre && (!ID || ID <= 0)) {
         console.log(genre);
