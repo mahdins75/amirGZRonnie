@@ -1,3 +1,5 @@
+const router = require("./routes/album")
+
 const artistList = [
     {
       "artist_id": 1,
@@ -270,3 +272,5 @@ const artistList = [
       "tags": "['blank realm']"
     }
   ]
+
+  module.exports={artistList};

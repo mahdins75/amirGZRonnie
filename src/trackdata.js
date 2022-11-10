@@ -410,3 +410,5 @@ const trackList = [
       "track_url": "http://freemusicarchive.org/music/AWOL/AWOL_-_A_Way_Of_Life/Street_Music"
     }
   ]
+
+module.exports = {trackList};

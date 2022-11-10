@@ -10,30 +10,30 @@ const router = Router();
 let favorits=[];
 
 router.get('/', function (request, response) {
-    let genre  = request.query.tracks;
-    let  item  = request.query.title;
-    let  ID  = request.query.genre_id;
-    let  parent  = request.query.parent;
+    let track  = request.query.track;
+    let  artist  = request.query.artist;
+    let  album  = request.query.album;
+    let  track_id  = request.query.track_id;
     let reuslt = musicList.musicList;
-    if (genre && (!ID || ID <= 0)) {
-        console.log(genre);
+    if (track && (!ID || ID <= 0)) {
+        console.log(track);
 
-        reuslt = reuslt.filter(m => m.genre.toLowerCase().includes(genre.toLowerCase()));
+        reuslt = reuslt.filter(m => m.track_title.toLowerCase().includes(track.toLowerCase()));
     }
-    if (item && (!ID || ID <= 0)) {
-    console.log(item);
+    if (artist && (!ID || ID <= 0)) {
+    console.log(artist);
 
-        reuslt = reuslt.filter(m => m.item.toLowerCase().includes(item.toLowerCase()));
+        reuslt = reuslt.filter(m => m.artist_name.toLowerCase().includes(artist.toLowerCase()));
     }
-    if (ID&&ID>0) {
+    if (track_id&&track_id>0) {
     console.log(ID);
 
         reuslt = reuslt.filter(m => m.ID == ID);
     }
-    if (parent&&parent>0) {
-        console.log(parent);
+    if (album&&album>0) {
+        console.log(album);
     
-            reuslt = reuslt.filter(m => m.parent == parent);
+            reuslt = reuslt.filter(m => m.album_title.toLowerCase().includes(album) );
     }
     
     if (reuslt) {
