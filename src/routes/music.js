@@ -14,6 +14,7 @@ router.get('/', function (request, response) {
     let  artist  = request.query.artist;
     let  album  = request.query.album;
     let  track_id  = request.query.track_id;
+    let sort=request.query.sort;
     let reuslt = musicList.musicList;
     if (track && (!ID || ID <= 0)) {
         console.log(track);
@@ -37,6 +38,20 @@ router.get('/', function (request, response) {
     }
     
     if (reuslt) {
+        switch (sort) {
+            case '1':
+                reuslt=reuslt.sort((a, b) => (a.track > b.track) ? -1 : 1);
+                break;
+            case '2':
+                reuslt=reuslt.sort((a, b) => (a.artist > b.artist) ? -1 : 1);
+                break;
+            case '3':
+                reuslt=reuslt.sort((a, b) => (a.album > b.album) ? -1 : 1);
+                break;
+        
+            default:
+                break;
+        }
         response.send(reuslt);
     }
     else {
